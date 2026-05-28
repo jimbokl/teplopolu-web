@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+// Native select for mobile compatibility
 import { calculateElectricFloor } from "@/lib/calculations/electric";
 import type { SystemType, RoomType, HeatingMode } from "@/lib/calculations/types";
 
@@ -72,28 +72,32 @@ export function Calculator() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Тип помещения</Label>
-                    <Select value={roomType} onValueChange={(v) => setRoomType(v as RoomType)}>
-                      <SelectTrigger><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="bathroom">Ванная</SelectItem>
-                        <SelectItem value="kitchen">Кухня</SelectItem>
-                        <SelectItem value="balcony">Балкон</SelectItem>
-                        <SelectItem value="corridor">Коридор</SelectItem>
-                        <SelectItem value="default">Другое</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="room-type">Тип помещения</Label>
+                    <select
+                      id="room-type"
+                      value={roomType}
+                      onChange={(e) => setRoomType(e.target.value as RoomType)}
+                      className="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-300"
+                    >
+                      <option value="bathroom">Ванная</option>
+                      <option value="kitchen">Кухня</option>
+                      <option value="balcony">Балкон</option>
+                      <option value="corridor">Коридор</option>
+                      <option value="default">Другое</option>
+                    </select>
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Режим обогрева</Label>
-                    <Select value={heatingMode} onValueChange={(v) => setHeatingMode(v as HeatingMode)}>
-                      <SelectTrigger><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="comfort">Комфортный</SelectItem>
-                        <SelectItem value="main">Основной</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="heating-mode">Режим обогрева</Label>
+                    <select
+                      id="heating-mode"
+                      value={heatingMode}
+                      onChange={(e) => setHeatingMode(e.target.value as HeatingMode)}
+                      className="flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-300"
+                    >
+                      <option value="comfort">Комфортный</option>
+                      <option value="main">Основной</option>
+                    </select>
                   </div>
 
                   <Separator />
